@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <script>
+        // Get the fragment identifier from the URL
+        const fragment = window.location.hash;
+
+        // Remove the leading "#" symbol if present
+        const data = fragment.substring(1);
+
+        // Now, 'data' contains the value "hand"
+        if(data != ""){
+        swal("Here's the Result!", data);
+        }
+        window.location.href = "file:///C:/Users/Codego/Documents/egohands-public-v9/index.html"
+</script>
+</body>
+</html>
+
