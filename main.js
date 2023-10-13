@@ -124,7 +124,7 @@ $(function () {
             const height = prediction.bbox.height;
 
         
-            window.location.href = "file:///C:/Users/Codego/Documents/egohands-public-v9/alert.html#" + prediction.class;
+            window.location.href = "https://kitenebie.github.io/AI-sacanner/alert.html#" + prediction.class;
         });
 
         predictions.forEach(function (prediction) {
