@@ -1,8 +1,8 @@
 /*jshint esversion:6*/
 
-
 $(function () {
     const video = $("video")[0];
+
     var model;
     var cameraMode = "environment"; // or "user"
 
@@ -23,7 +23,7 @@ $(function () {
             });
         });
 
-    var publishable_key = "rf_5w20VzQObTXjJhTjq6kad9ubrm33";
+    var publishable_key = "rf_4T3JQkVkTxavl0k2Y1qcp6WCLdu1";
     var toLoad = {
         model: "waste-management-sys",
         version: 5
@@ -106,7 +106,7 @@ $(function () {
             top: ($(window).height() - dimensions.height) / 2
         });
 
-        $("#cont").append(canvas);
+        $("body").append(canvas);
     };
 
     const renderPredictions = function (predictions) {
@@ -123,8 +123,26 @@ $(function () {
             const width = prediction.bbox.width;
             const height = prediction.bbox.height;
 
-        
-            window.location.href = "https://kitenebie.github.io/AI-sacanner/alert.html#" + prediction.class;
+            // Draw the bounding box.
+            ctx.strokeStyle = prediction.color;
+            ctx.lineWidth = 4;
+            ctx.strokeRect(
+                (x - width / 2) / scale,
+                (y - height / 2) / scale,
+                width / scale,
+                height / scale
+            );
+
+            // Draw the label background.
+            ctx.fillStyle = prediction.color;
+            const textWidth = ctx.measureText(prediction.class).width;
+            const textHeight = parseInt(font, 10); // base 10
+            ctx.fillRect(
+                (x - width / 2) / scale,
+                (y - height / 2) / scale,
+                textWidth + 8,
+                textHeight + 4
+            );
         });
 
         predictions.forEach(function (prediction) {
@@ -134,6 +152,15 @@ $(function () {
             const width = prediction.bbox.width;
             const height = prediction.bbox.height;
 
+            // Draw the text last to ensure it's on top.
+            ctx.font = font;
+            ctx.textBaseline = "top";
+            ctx.fillStyle = "#000000";
+            ctx.fillText(
+                prediction.class,
+                (x - width / 2) / scale + 4,
+                (y - height / 2) / scale + 1
+            );
         });
     };
 
